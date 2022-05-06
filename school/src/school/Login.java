@@ -38,7 +38,6 @@ public class Login extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -46,22 +45,23 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("School Management System");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(510, 70, 170, 14);
+        jLabel2.setBounds(260, 70, 620, 60);
 
-        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Username");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(480, 300, 120, 29);
+        jLabel5.setBounds(480, 300, 120, 28);
 
-        jLabel4.setFont(new java.awt.Font("Wide Latin", 1, 36)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Script MT Bold", 1, 48)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("LogIn");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(490, 230, 110, 50);
+        jLabel4.setBounds(460, 210, 210, 50);
 
         usrname.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jPanel1.add(usrname);
@@ -96,21 +96,13 @@ public class Login extends javax.swing.JFrame {
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Log In");
         jPanel1.add(jButton3);
-        jButton3.setBounds(500, 610, 160, 50);
+        jButton3.setBounds(510, 530, 160, 50);
 
-        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Password");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(480, 390, 120, 29);
-
-        jButton2.setBackground(new java.awt.Color(0.0f, 0.0f, 0.0f, 0.0f));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Creat Account");
-        jButton2.setOpaque(false);
-        jPanel1.add(jButton2);
-        jButton2.setBounds(520, 510, 130, 25);
+        jLabel7.setBounds(480, 390, 120, 28);
 
         jButton1.setBackground(new java.awt.Color(0.0f, 0.0f, 0.0f, 0.0f));
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -187,7 +179,6 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
