@@ -18,5 +18,5 @@ CREATE TABLE teacher (
     DOJ              DATE,
     DOR              DATE,
     image         BLOB,
-    deleted       BOOLEAN,
+    deleted       BOOLEAN
 );

@@ -9,7 +9,7 @@ CREATE TABLE students (
     image         BLOB,
     deleted       BOOLEAN,
     cast          VARCHAR (10),
-    relision      VARCHAR (10),
+    religion      VARCHAR (10),
     fatherName    VARCHAR (20),
     fatherCNIC    VARCHAR (50),
     fatherPh      VARCHAR (15),
