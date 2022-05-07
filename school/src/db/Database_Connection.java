@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 /**
  *
  * @author hp
@@ -22,7 +21,7 @@ public class Database_Connection {
     {
         this.url=url;
     }
-    Connection db_connction(String url)
+    Connection db_connction()
     {
         try {
             Class.forName("org.sqlite.JDBC");
