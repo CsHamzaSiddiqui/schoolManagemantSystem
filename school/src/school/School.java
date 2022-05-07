@@ -4,18 +4,21 @@
  * and open the template in the editor.
  */
 package school;
-
+import db.masterFile;
+import utils.getBasicPath;
 /**
  *
  * @author Laptop Point
  */
 public class School {
-
+    public static String url=getBasicPath.currentPath()+"/dataBases/schoolDB.db";
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Login().setVisible(true);
+        masterFile master=new masterFile();
+        master.runMigrations();
+//        new Login().setVisible(true);
         // TODO code application logic here
     }
     

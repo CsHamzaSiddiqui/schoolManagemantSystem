@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/hamza%20folder/school/src/school/usr.png</file>
-            <file>file:/E:/hamza%20folder/school/src/school/Home.java</file>
-            <file>file:/E:/hamza%20folder/school/src/school/School.java</file>
-            <file>file:/E:/hamza%20folder/school/src/school/loack.png</file>
-            <file>file:/E:/hamza%20folder/school/src/school/pages1.jpg</file>
-            <file>file:/E:/hamza%20folder/school/src/school/Login.java</file>
+            <file>file:/D:/School%20Management%20System/school/src/db/Database_Connection.java</file>
+            <file>file:/D:/School%20Management%20System/school/src/school/Login.java</file>
+            <file>file:/D:/School%20Management%20System/school/src/school/Home.java</file>
+            <file>file:/D:/School%20Management%20System/school/src/entities/teacher.java</file>
+            <file>file:/D:/School%20Management%20System/school/src/entities/student.java</file>
         </group>
     </open-files>
 </project-private>
