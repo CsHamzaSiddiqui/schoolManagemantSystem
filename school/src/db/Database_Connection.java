@@ -21,7 +21,7 @@ public class Database_Connection {
     {
         this.url=url;
     }
-    Connection db_connction()
+    public Connection db_connction()
     {
         try {
             Class.forName("org.sqlite.JDBC");

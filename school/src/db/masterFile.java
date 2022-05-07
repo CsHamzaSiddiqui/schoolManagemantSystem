@@ -54,6 +54,7 @@ public class masterFile {
     public void runMigrations(){
         List<String> migrationFiles = new ArrayList<>();
         migrationFiles.add("createStudent");
+        migrationFiles.add("createTeacher");
         List<String> dbMigrations = gettingMigrations();
         for(String migrationFile : migrationFiles){
             if(!dbMigrations.contains(migrationFile)){
