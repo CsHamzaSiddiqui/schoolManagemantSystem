@@ -47,6 +47,12 @@ public class customDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(customDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(customDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return names;
     }

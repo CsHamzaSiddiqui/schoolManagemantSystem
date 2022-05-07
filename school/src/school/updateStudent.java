@@ -8,38 +8,30 @@ package school;
 import DAOs.studentDAO;
 import entities.student;
 import java.sql.Date;
-import utils.browseImage;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
+import utils.browseImage;
 import utils.imageConversion;
+import utils.popups;
 
 /**
  *
- * @author Laptop Point
+ * @author hp
  */
-public class Home extends javax.swing.JFrame {
-     studentDAO dao=new studentDAO();
-     viewStudent viewStd=new viewStudent();
-     updateStudent updateStd = new updateStudent();
+public class updateStudent extends javax.swing.JPanel {
+    studentDAO dao=new studentDAO();
+    imageConversion ic = new imageConversion();
+    static student staticStd=new student();
+
     /**
-     * Creates new form Home
+     * Creates new form updateStudent
      */
-    public Home() {
+    public updateStudent() {
         initComponents();
-        addstd.setVisible(false);
-        
-        jPanel4.add(viewStd);
-        viewStd.setBounds(0, 0, 1280, 530);
-        viewStd.setVisible(false);
-        
-        jPanel4.add(updateStd);
-        updateStd.setBounds(0, 0, 1280, 530);
-        updateStd.setVisible(false);
-        
     }
 
-    public void resetValues(){
-        id.setText(String.valueOf(dao.getMaxId()));
+    public void resetValues(String mode){
+        id.setText("");
         name.setText("");
         className.setText("");
         bform.setText("");
@@ -52,6 +44,39 @@ public class Home extends javax.swing.JFrame {
         religion.setText("");
         motherName.setText("");
         motherCNIC.setText("");
+        path.setText("");
+        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imageicon.png"))); 
+        if(mode.equalsIgnoreCase("Delete Student")){
+            className.setEditable(false);
+            bform.setEditable(false);
+            address.setEditable(false);
+            roll.setEditable(false);
+            cast.setEditable(false);
+            fatherCNIC.setEditable(false);
+            fatherName.setEditable(false);
+            fatherPh.setEditable(false);
+            motherName.setEditable(false);
+            motherCNIC.setEditable(false);
+            admission.setEnabled(false);
+            delete.setVisible(true);
+            update.setVisible(false);
+            brows.setVisible(false);
+        }else if(mode.equalsIgnoreCase("Update Student")){
+            className.setEditable(true);
+            bform.setEditable(true);
+            address.setEditable(true);
+            roll.setEditable(true);
+            cast.setEditable(true);
+            fatherCNIC.setEditable(true);
+            fatherName.setEditable(true);
+            fatherPh.setEditable(true);
+            motherName.setEditable(true);
+            motherCNIC.setEditable(true);
+            admission.setEnabled(true);
+            delete.setVisible(false);
+            update.setVisible(true);
+            brows.setVisible(true);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,15 +87,11 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        title = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        StudentBox = new javax.swing.JComboBox<>();
-        TeacherBox = new javax.swing.JComboBox<>();
-        jPanel4 = new javax.swing.JPanel();
         addstd = new javax.swing.JPanel();
         bform = new javax.swing.JTextField();
+        namePopup = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        names = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
@@ -81,8 +102,8 @@ public class Home extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         path = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        brows = new javax.swing.JButton();
+        update = new javax.swing.JButton();
         admission = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
         roll = new javax.swing.JTextField();
@@ -102,60 +123,10 @@ public class Home extends javax.swing.JFrame {
         cast = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         fatherPh = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        search = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setLayout(null);
-
-        jPanel2.setForeground(new java.awt.Color(0.0f, 0.0f, 0.0f, 0.1f));
-        jPanel2.setLayout(null);
-
-        title.setFont(new java.awt.Font("Serif", 1, 48)); // NOI18N
-        title.setForeground(new java.awt.Color(255, 255, 255));
-        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("Home");
-        jPanel2.add(title);
-        title.setBounds(250, 10, 820, 60);
-
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 20, 1360, 80);
-
-        StudentBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student Details", "View Students", "Add Student", "Update Student", "Delete Student" }));
-        StudentBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                StudentBoxItemStateChanged(evt);
-            }
-        });
-
-        TeacherBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teacher Details", "View Teachers", "Add  Teacher", "Update Teacher", "Delete Teacher" }));
-        TeacherBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                TeacherBoxItemStateChanged(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(StudentBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TeacherBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1064, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(StudentBox, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-            .addComponent(TeacherBox)
-        );
-
-        jPanel1.add(jPanel3);
-        jPanel3.setBounds(0, 100, 1370, 30);
-
-        jPanel4.setBackground(new java.awt.Color(51, 51, 255));
-        jPanel4.setLayout(null);
+        setLayout(null);
 
         addstd.setLayout(null);
 
@@ -168,6 +139,30 @@ public class Home extends javax.swing.JFrame {
         addstd.add(bform);
         bform.setBounds(270, 200, 270, 34);
 
+        names.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                namesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(names);
+
+        javax.swing.GroupLayout namePopupLayout = new javax.swing.GroupLayout(namePopup);
+        namePopup.setLayout(namePopupLayout);
+        namePopupLayout.setHorizontalGroup(
+            namePopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+        );
+        namePopupLayout.setVerticalGroup(
+            namePopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(namePopupLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        addstd.add(namePopup);
+        namePopup.setBounds(270, 70, 270, 110);
+        namePopup.setVisible(false);
+
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setText("B.Form No");
         addstd.add(jLabel3);
@@ -176,11 +171,16 @@ public class Home extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("Name");
         addstd.add(jLabel4);
-        jLabel4.setBounds(160, 150, 120, 30);
+        jLabel4.setBounds(160, 40, 120, 30);
 
         name.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameKeyReleased(evt);
+            }
+        });
         addstd.add(name);
-        name.setBounds(270, 150, 270, 34);
+        name.setBounds(270, 40, 270, 34);
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Sr. NO");
@@ -209,7 +209,7 @@ public class Home extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setText("Class Name");
         addstd.add(jLabel7);
-        jLabel7.setBounds(590, 100, 120, 30);
+        jLabel7.setBounds(160, 150, 120, 30);
 
         path.setEditable(false);
         path.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -219,31 +219,32 @@ public class Home extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Admission Date");
         addstd.add(jLabel8);
-        jLabel8.setBounds(1000, 90, 120, 30);
+        jLabel8.setBounds(580, 100, 120, 30);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton1.setText("Browse");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        brows.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        brows.setText("Browse");
+        brows.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                browsActionPerformed(evt);
             }
         });
-        addstd.add(jButton1);
-        jButton1.setBounds(1020, 390, 190, 30);
+        addstd.add(brows);
+        brows.setBounds(1020, 390, 190, 30);
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton2.setText("Add Student");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        update.setBackground(new java.awt.Color(102, 0, 255));
+        update.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        update.setText("Update Student");
+        update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                updateActionPerformed(evt);
             }
         });
-        addstd.add(jButton2);
-        jButton2.setBounds(450, 470, 240, 40);
+        addstd.add(update);
+        update.setBounds(500, 460, 240, 40);
 
         admission.setDateFormatString("yyyy-MM-dd");
         addstd.add(admission);
-        admission.setBounds(1000, 130, 200, 30);
+        admission.setBounds(700, 100, 250, 30);
         admission.setDate(Date.valueOf(LocalDate.now()));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -262,7 +263,7 @@ public class Home extends javax.swing.JFrame {
 
         className.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         addstd.add(className);
-        className.setBounds(700, 100, 250, 34);
+        className.setBounds(270, 150, 270, 34);
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel11.setText("Father's Name");
@@ -342,89 +343,53 @@ public class Home extends javax.swing.JFrame {
         addstd.add(fatherPh);
         fatherPh.setBounds(700, 250, 250, 34);
 
-        jPanel4.add(addstd);
+        search.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        search.setText("Search Student");
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        addstd.add(search);
+        search.setBounds(590, 40, 220, 30);
+
+        delete.setBackground(new java.awt.Color(204, 0, 0));
+        delete.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        delete.setText("Delete Student");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+        addstd.add(delete);
+        delete.setBounds(500, 460, 240, 40);
+
+        add(addstd);
         addstd.setBounds(0, 0, 1280, 530);
-
-        jPanel1.add(jPanel4);
-        jPanel4.setBounds(30, 160, 1280, 530);
-        jPanel4.setVisible(false);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/school/homeback.png"))); // NOI18N
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1570, 750);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1354, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
-        );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void StudentBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_StudentBoxItemStateChanged
-        TeacherBox.setSelectedIndex(0);
-        if(StudentBox.getSelectedIndex()>0){
-            jPanel4.setVisible(true);
-            title.setText((String) StudentBox.getSelectedItem());
-            switch (StudentBox.getSelectedIndex()) {
-                case 1:
-                    addstd.setVisible(false);
-                    updateStd.setVisible(false);
-                    viewStd.setVisible(true);
-                    viewStd.setValues();
-                    break;
-                case 2:
-                    addstd.setVisible(true);
-                    viewStd.setVisible(false);
-                    updateStd.setVisible(false);
-                    resetValues();
-                    break;
-                case 3:
-                case 4:
-                    addstd.setVisible(false);
-                    updateStd.setVisible(true);
-                    viewStd.setVisible(false);
-                    updateStd.resetValues((String) StudentBox.getSelectedItem());
-                    break;
-                default:
-                    break;
-            }
+    private void bformKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bformKeyPressed
+        char c = evt.getKeyChar();
+        if(Character.isDigit(c) || Character.isISOControl(c)){
+            bform.setEditable(true);
         }else{
-            jPanel4.setVisible(false);
-            title.setText("HOME");
+            bform.setEditable(false);
         }
         // TODO add your handling code here:
-    }//GEN-LAST:event_StudentBoxItemStateChanged
-
-    private void TeacherBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TeacherBoxItemStateChanged
-        StudentBox.setSelectedIndex(0);
-        if(TeacherBox.getSelectedIndex()>0){
-            title.setText((String) TeacherBox.getSelectedItem());
-        }else{
-            title.setText("HOME");
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TeacherBoxItemStateChanged
+    }//GEN-LAST:event_bformKeyPressed
 
     private void addressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addressActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        browseImage browse = new browseImage();
-        browse.brows(image, path);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         imageConversion ic=new imageConversion();
-        byte[] bytes = ic.fileToByte(path.getText());
+        byte[] bytes=null;
+        if(path.getText().isEmpty()){
+            bytes = staticStd.getImage();
+        }else{
+            bytes = ic.fileToByte(path.getText());
+        }
         student std=new student();
         std.setId(Integer.parseInt(id.getText()));
         std.setName(name.getText());
@@ -442,20 +407,11 @@ public class Home extends javax.swing.JFrame {
         std.setReligion(religion.getText());
         std.setMotherName(motherName.getText());
         std.setMotherCNIC(motherCNIC.getText());
-        dao.saveStudent(std);
-        JOptionPane.showMessageDialog(null, "Student Saved Successfully...");
+        dao.updateStudent(std);
+        JOptionPane.showMessageDialog(null, "Student Updated Successfully...");
+        resetValues("Update student");
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void bformKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bformKeyPressed
-        char c = evt.getKeyChar();
-        if(Character.isDigit(c) || Character.isISOControl(c)){
-            bform.setEditable(true);
-        }else{
-            bform.setEditable(false);
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bformKeyPressed
+    }//GEN-LAST:event_updateActionPerformed
 
     private void fatherCNICKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fatherCNICKeyPressed
         char c = evt.getKeyChar();
@@ -467,16 +423,6 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fatherCNICKeyPressed
 
-    private void fatherPhKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fatherPhKeyPressed
-        char c = evt.getKeyChar();
-        if(Character.isDigit(c) || Character.isISOControl(c)){
-            fatherPh.setEditable(true);
-        }else{
-            fatherPh.setEditable(false);
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fatherPhKeyPressed
-
     private void motherCNICKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_motherCNICKeyPressed
         char c = evt.getKeyChar();
         if(Character.isDigit(c) || Character.isISOControl(c)){
@@ -487,58 +433,76 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_motherCNICKeyPressed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void fatherPhKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fatherPhKeyPressed
+        char c = evt.getKeyChar();
+        if(Character.isDigit(c) || Character.isISOControl(c)){
+            fatherPh.setEditable(true);
+        }else{
+            fatherPh.setEditable(false);
         }
-        //</editor-fold>
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fatherPhKeyPressed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Home().setVisible(true);
-            }
-        });
-    }
+    private void browsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsActionPerformed
+        browseImage browse = new browseImage();
+        browse.brows(image, path);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_browsActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        dao.deleteStudent(Integer.parseInt(id.getText()));
+        JOptionPane.showMessageDialog(null, "Student deleted successfully...");
+        resetValues("Delete Student");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        staticStd = dao.getStudentByName(name.getText());
+        id.setText(String.valueOf(staticStd.getId()));
+        name.setText(staticStd.getName());
+        className.setText(staticStd.getClassName());
+        bform.setText(staticStd.getCNIC());
+        address.setText(staticStd.getAddress());
+        roll.setText(staticStd.getRollNo());
+        cast.setText(staticStd.getCast());
+        fatherCNIC.setText(staticStd.getFatherCNIC());
+        fatherName.setText(staticStd.getFatherName());
+        fatherPh.setText(staticStd.getFatherPh());
+        religion.setText(staticStd.getReligion());
+        motherName.setText(staticStd.getMotherName());
+        motherCNIC.setText(staticStd.getMotherCNIC());
+        admission.setDate(staticStd.getAdmissionDate());
+        ic.byteToImage(staticStd.getImage(), image);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchActionPerformed
+
+    private void namesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_namesMouseClicked
+        namePopup.setVisible(false);
+        name.setText(names.getSelectedValue());
+        // TODO add your handling code here:
+    }//GEN-LAST:event_namesMouseClicked
+
+    private void nameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyReleased
+        popups pop=new popups();
+        pop.setStudentNamePopup(name.getText(), names, namePopup);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> StudentBox;
-    private javax.swing.JComboBox<String> TeacherBox;
     private javax.swing.JTextField address;
     private javax.swing.JPanel addstd;
     private com.toedter.calendar.JDateChooser admission;
     private javax.swing.JTextField bform;
+    private javax.swing.JButton brows;
     private javax.swing.JTextField cast;
     private javax.swing.JTextField className;
+    private javax.swing.JButton delete;
     private javax.swing.JTextField fatherCNIC;
     private javax.swing.JTextField fatherName;
     private javax.swing.JTextField fatherPh;
     private javax.swing.JTextField id;
     public javax.swing.JLabel image;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -553,16 +517,17 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField motherCNIC;
     private javax.swing.JTextField motherName;
     private javax.swing.JTextField name;
+    private javax.swing.JPanel namePopup;
+    private javax.swing.JList<String> names;
     private javax.swing.JTextField path;
     private javax.swing.JTextField religion;
     private javax.swing.JTextField roll;
-    private javax.swing.JLabel title;
+    private javax.swing.JButton search;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }
+

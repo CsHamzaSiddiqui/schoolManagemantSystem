@@ -6,6 +6,7 @@
 package DAOs;
 
 import db.Database_Connection;
+import entities.searchFilter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +19,7 @@ import static school.School.url;
 import entities.student;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import static school.School.url;
 
 /**
  *
@@ -63,6 +65,43 @@ public class studentDAO {
             }
         }
         return students;
+    }
+    
+    public student getStudentByName(String name){
+        Database_Connection database_Connection = new Database_Connection(url);
+        Connection con = database_Connection.db_connction();
+        student std=new student();
+        try {
+            PreparedStatement ps = con.prepareStatement("select * from students where name = '"+name+"' and deleted=0");
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                std.setId(rs.getInt("id"));
+                std.setName(rs.getString("name"));
+                std.setClassName(rs.getString("className"));
+                std.setCNIC(rs.getString("CNIC"));
+                std.setAddress(rs.getString("Address"));
+                std.setAdmissionDate(rs.getDate("admissionDate"));
+                std.setImage(rs.getBytes("image"));
+                std.setDeleted(rs.getBoolean("deleted"));
+                std.setRollNo(rs.getString("rollNo"));
+                std.setCast(rs.getString("cast"));
+                std.setFatherName(rs.getString("fatherName"));
+                std.setFatherCNIC(rs.getString("fatherCNIC"));
+                std.setFatherPh(rs.getString("fatherPh"));
+                std.setReligion(rs.getString("religion"));
+                std.setMotherName(rs.getString("motherName"));
+                std.setMotherCNIC(rs.getString("motherCNIC"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(studentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(studentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return std;
     }
     
     public List<student> findAll(){
@@ -142,7 +181,7 @@ public class studentDAO {
         Database_Connection database_Connection = new Database_Connection(url);
         Connection con = database_Connection.db_connction();
         try {
-            PreparedStatement ps=con.prepareStatement("update students set deleted=true where id = ?");
+            PreparedStatement ps=con.prepareStatement("update students set deleted=1 where id = ?");
             ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("Student deleted succesfully...");
@@ -203,5 +242,55 @@ public class studentDAO {
             }
         }
         return 1;
+    }
+    
+    public List<student> getStudentsByFilters(List<searchFilter> filters){
+        Database_Connection database_Connection = new Database_Connection(url);
+        Connection con = database_Connection.db_connction();
+        List<student> students = new ArrayList<>();
+        String query = "select * from students where deleted=0 ";
+        int i=0;
+        for(searchFilter filter: filters){
+            i++;
+            if(i==filters.size()){
+                query = query + " and "+filter.getFieldName()+" like '"+filter.getFieldValue()+"%'";
+            }else{
+                query = query + " and "+filter.getFieldName()+" = '"+filter.getFieldValue()+"'";
+            }
+        }
+        System.out.println("Filter query : "+query);
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                student std=new student();
+                std.setId(rs.getInt("id"));
+                std.setName(rs.getString("name"));
+                std.setClassName(rs.getString("className"));
+                std.setCNIC(rs.getString("CNIC"));
+                std.setAddress(rs.getString("Address"));
+                std.setAdmissionDate(rs.getDate("admissionDate"));
+                std.setImage(rs.getBytes("image"));
+                std.setDeleted(rs.getBoolean("deleted"));
+                std.setRollNo(rs.getString("rollNo"));
+                std.setCast(rs.getString("cast"));
+                std.setFatherName(rs.getString("fatherName"));
+                std.setFatherCNIC(rs.getString("fatherCNIC"));
+                std.setFatherPh(rs.getString("fatherPh"));
+                std.setReligion(rs.getString("religion"));
+                std.setMotherName(rs.getString("motherName"));
+                std.setMotherCNIC(rs.getString("motherCNIC"));
+                students.add(std);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(studentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(studentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return students;
     }
 }
