@@ -19,12 +19,18 @@ import utils.imageConversion;
  */
 public class Home extends javax.swing.JFrame {
      studentDAO dao=new studentDAO();
-
+     viewStudent viewStd=new viewStudent();
     /**
      * Creates new form Home
      */
     public Home() {
         initComponents();
+        addstd.setVisible(false);
+        
+        jPanel4.add(viewStd);
+        viewStd.setBounds(0, 0, 1280, 530);
+        viewStd.setVisible(false);
+        
         id.setText(String.valueOf(dao.getMaxId()));
     }
 
@@ -44,6 +50,7 @@ public class Home extends javax.swing.JFrame {
         StudentBox = new javax.swing.JComboBox<>();
         TeacherBox = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
+        addstd = new javax.swing.JPanel();
         bform = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -128,39 +135,42 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(jPanel3);
         jPanel3.setBounds(0, 100, 1370, 30);
 
+        jPanel4.setBackground(new java.awt.Color(51, 51, 255));
         jPanel4.setLayout(null);
 
+        addstd.setLayout(null);
+
         bform.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(bform);
+        addstd.add(bform);
         bform.setBounds(270, 200, 270, 34);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setText("B.Form No");
-        jPanel4.add(jLabel3);
+        addstd.add(jLabel3);
         jLabel3.setBounds(160, 200, 120, 30);
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("Name");
-        jPanel4.add(jLabel4);
+        addstd.add(jLabel4);
         jLabel4.setBounds(160, 150, 120, 30);
 
         name.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(name);
+        addstd.add(name);
         name.setBounds(270, 150, 270, 34);
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Sr. NO");
-        jPanel4.add(jLabel5);
+        addstd.add(jLabel5);
         jLabel5.setBounds(160, 100, 120, 30);
 
         id.setEditable(false);
         id.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(id);
+        addstd.add(id);
         id.setBounds(270, 100, 270, 34);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setText("Address");
-        jPanel4.add(jLabel6);
+        addstd.add(jLabel6);
         jLabel6.setBounds(160, 400, 120, 30);
 
         address.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -169,22 +179,22 @@ public class Home extends javax.swing.JFrame {
                 addressActionPerformed(evt);
             }
         });
-        jPanel4.add(address);
+        addstd.add(address);
         address.setBounds(270, 400, 680, 34);
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setText("Class Name");
-        jPanel4.add(jLabel7);
+        addstd.add(jLabel7);
         jLabel7.setBounds(590, 100, 120, 30);
 
         path.setEditable(false);
         path.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(path);
+        addstd.add(path);
         path.setBounds(1020, 350, 190, 30);
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Admission Date");
-        jPanel4.add(jLabel8);
+        addstd.add(jLabel8);
         jLabel8.setBounds(1000, 90, 120, 30);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -194,7 +204,7 @@ public class Home extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton1);
+        addstd.add(jButton1);
         jButton1.setBounds(1020, 390, 190, 30);
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -204,97 +214,101 @@ public class Home extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton2);
-        jButton2.setBounds(430, 470, 240, 40);
+        addstd.add(jButton2);
+        jButton2.setBounds(450, 470, 240, 40);
 
         admission.setDateFormatString("yyyy-MM-dd");
-        jPanel4.add(admission);
+        addstd.add(admission);
         admission.setBounds(1000, 130, 200, 30);
         admission.setDate(Date.valueOf(LocalDate.now()));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel9.setText("Roll No");
-        jPanel4.add(jLabel9);
+        addstd.add(jLabel9);
         jLabel9.setBounds(590, 150, 120, 30);
 
         roll.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(roll);
+        addstd.add(roll);
         roll.setBounds(700, 150, 250, 34);
 
         image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imageicon.png"))); // NOI18N
-        jPanel4.add(image);
+        addstd.add(image);
         image.setBounds(1030, 200, 140, 130);
 
         className.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(className);
+        addstd.add(className);
         className.setBounds(700, 100, 250, 34);
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel11.setText("Father's Name");
-        jPanel4.add(jLabel11);
+        addstd.add(jLabel11);
         jLabel11.setBounds(590, 200, 120, 30);
 
         fatherName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(fatherName);
+        addstd.add(fatherName);
         fatherName.setBounds(700, 200, 250, 34);
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel12.setText("Father's CNIC");
-        jPanel4.add(jLabel12);
+        addstd.add(jLabel12);
         jLabel12.setBounds(160, 250, 120, 30);
 
         fatherCNIC.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(fatherCNIC);
+        addstd.add(fatherCNIC);
         fatherCNIC.setBounds(270, 250, 270, 34);
 
         jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel13.setText("Mother's Name");
-        jPanel4.add(jLabel13);
+        addstd.add(jLabel13);
         jLabel13.setBounds(160, 300, 120, 30);
 
         motherName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(motherName);
+        addstd.add(motherName);
         motherName.setBounds(270, 300, 270, 34);
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel14.setText("Mother's CNIC");
-        jPanel4.add(jLabel14);
+        addstd.add(jLabel14);
         jLabel14.setBounds(590, 300, 120, 30);
 
         motherCNIC.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(motherCNIC);
+        addstd.add(motherCNIC);
         motherCNIC.setBounds(700, 300, 250, 34);
 
         jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel15.setText("Religion");
-        jPanel4.add(jLabel15);
+        addstd.add(jLabel15);
         jLabel15.setBounds(160, 350, 120, 30);
 
         religion.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(religion);
+        addstd.add(religion);
         religion.setBounds(270, 350, 270, 34);
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel16.setText("Cast");
-        jPanel4.add(jLabel16);
+        addstd.add(jLabel16);
         jLabel16.setBounds(590, 350, 120, 30);
 
         cast.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(cast);
+        addstd.add(cast);
         cast.setBounds(700, 350, 250, 34);
 
         jLabel17.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel17.setText("Father's Ph.");
-        jPanel4.add(jLabel17);
+        addstd.add(jLabel17);
         jLabel17.setBounds(590, 250, 120, 30);
 
         fatherPh.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel4.add(fatherPh);
+        addstd.add(fatherPh);
         fatherPh.setBounds(700, 250, 250, 34);
 
+        jPanel4.add(addstd);
+        addstd.setBounds(0, 0, 1280, 530);
+
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(40, 150, 1280, 530);
+        jPanel4.setBounds(30, 160, 1280, 530);
+        jPanel4.setVisible(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/school/homeback.png"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -317,8 +331,18 @@ public class Home extends javax.swing.JFrame {
     private void StudentBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_StudentBoxItemStateChanged
         TeacherBox.setSelectedIndex(0);
         if(StudentBox.getSelectedIndex()>0){
+            jPanel4.setVisible(true);
             title.setText((String) StudentBox.getSelectedItem());
+            if(StudentBox.getSelectedIndex()==1){
+                addstd.setVisible(false);
+                viewStd.setVisible(true);
+                viewStd.setValues();
+            }else if(StudentBox.getSelectedIndex()==2){
+                addstd.setVisible(true);
+                viewStd.setVisible(false);
+            }
         }else{
+            jPanel4.setVisible(false);
             title.setText("HOME");
         }
         // TODO add your handling code here:
@@ -408,6 +432,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> StudentBox;
     private javax.swing.JComboBox<String> TeacherBox;
     private javax.swing.JTextField address;
+    private javax.swing.JPanel addstd;
     private com.toedter.calendar.JDateChooser admission;
     private javax.swing.JTextField bform;
     private javax.swing.JTextField cast;

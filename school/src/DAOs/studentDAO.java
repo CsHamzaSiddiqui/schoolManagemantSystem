@@ -31,7 +31,7 @@ public class studentDAO {
         Connection con = database_Connection.db_connction();
         List<student> students=new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("select * from students where name like '"+alpha+"%' and deleted=false");
+            PreparedStatement ps = con.prepareStatement("select * from students where name like '"+alpha+"%' and deleted=0");
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 student std=new student();
@@ -70,7 +70,7 @@ public class studentDAO {
         Connection con = database_Connection.db_connction();
         List<student> students=new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("select * from students where deleted=false");
+            PreparedStatement ps = con.prepareStatement("select * from students where deleted=0");
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 student std=new student();
@@ -161,7 +161,7 @@ public class studentDAO {
         Database_Connection database_Connection = new Database_Connection(url);
         Connection con = database_Connection.db_connction();
         try {
-            PreparedStatement ps=con.prepareStatement("update students set name=?, className=?, CNIC=?, address=?, admissionDate=?, image=?, rollNo=?, cast=?, religion=?, fatherName=?, fatherCNIC=?, fatherPh=?, motherName=?, motherCNIC=? where id=? and deleted=false");
+            PreparedStatement ps=con.prepareStatement("update students set name=?, className=?, CNIC=?, address=?, admissionDate=?, image=?, rollNo=?, cast=?, religion=?, fatherName=?, fatherCNIC=?, fatherPh=?, motherName=?, motherCNIC=? where id=? and deleted=0");
             ps.setString(1, student.getName());
             ps.setString(2, student.getClassName());
             ps.setString(3, student.getCNIC());
