@@ -20,6 +20,7 @@ public class teacher {
     private String address;
     private byte[] image;
     private String education;
+    private boolean deleted;
 
     public int getId() {
         return id;
@@ -85,8 +86,18 @@ public class teacher {
         this.education = education;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
-        return "teacher{" + "id=" + id + ", name=" + name + ", CNIC=" + CNIC + ", ph=" + ph + ", date=" + date + ", address=" + address + ", image=" + image + ", education=" + education + '}';
+        return "teacher{" + "id=" + id + ", name=" + name + ", CNIC=" + CNIC + ", ph=" + ph + ", date=" + date + ", address=" + address + ", image=" + image + ", education=" + education + ", deleted=" + deleted + '}';
     }
+
+    
 }
