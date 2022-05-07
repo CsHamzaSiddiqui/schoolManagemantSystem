@@ -43,6 +43,14 @@ public class studentDAO {
                 std.setAdmissionDate(rs.getDate("admissionDate"));
                 std.setImage(rs.getBytes("image"));
                 std.setDeleted(rs.getBoolean("deleted"));
+                std.setRollNo(rs.getString("rollNo"));
+                std.setCast(rs.getString("cast"));
+                std.setFatherName(rs.getString("fatherName"));
+                std.setFatherCNIC(rs.getString("fatherCNIC"));
+                std.setFatherPh(rs.getString("fatherPh"));
+                std.setReligion(rs.getString("religion"));
+                std.setMotherName(rs.getString("motherName"));
+                std.setMotherCNIC(rs.getString("motherCNIC"));
                 students.add(std);
             }
         } catch (SQLException ex) {
@@ -74,6 +82,14 @@ public class studentDAO {
                 std.setAdmissionDate(rs.getDate("admissionDate"));
                 std.setImage(rs.getBytes("image"));
                 std.setDeleted(rs.getBoolean("deleted"));
+                std.setRollNo(rs.getString("rollNo"));
+                std.setCast(rs.getString("cast"));
+                std.setFatherName(rs.getString("fatherName"));
+                std.setFatherCNIC(rs.getString("fatherCNIC"));
+                std.setFatherPh(rs.getString("fatherPh"));
+                std.setReligion(rs.getString("religion"));
+                std.setMotherName(rs.getString("motherName"));
+                std.setMotherCNIC(rs.getString("motherCNIC"));
                 students.add(std);
             }
         } catch (SQLException ex) {
@@ -92,14 +108,23 @@ public class studentDAO {
         Database_Connection database_Connection = new Database_Connection(url);
         Connection con = database_Connection.db_connction();
         try {
-            PreparedStatement ps=con.prepareStatement("insert into students (id, name, className, CNIC, address, admissionDate, image, deleted) values (max(id)+1, ?, ?, ?, ?, ?, ?)");
-            ps.setString(1, student.getName());
-            ps.setString(2, student.getClassName());
-            ps.setString(3, student.getCNIC());
-            ps.setString(4, student.getAddress());
-            ps.setDate(5, Date.valueOf(sdf.format(student.getAdmissionDate())));
-            ps.setBytes(6, student.getImage());
-            ps.setBoolean(7, student.isDeleted());
+            PreparedStatement ps=con.prepareStatement("insert into students (id, name, className, CNIC, address, admissionDate, image, deleted, rollNo, cast, religion, fatherName, fatherCNIC, fatherPh, motherName, motherCNIC) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, student.getId());
+            ps.setString(2, student.getName());
+            ps.setString(3, student.getClassName());
+            ps.setString(4, student.getCNIC());
+            ps.setString(5, student.getAddress());
+            ps.setDate(6, Date.valueOf(sdf.format(student.getAdmissionDate())));
+            ps.setBytes(7, student.getImage());
+            ps.setBoolean(8, student.isDeleted());
+            ps.setString(9, student.getRollNo());
+            ps.setString(10, student.getCast());
+            ps.setString(11, student.getReligion());
+            ps.setString(12, student.getFatherName());
+            ps.setString(13, student.getFatherCNIC());
+            ps.setString(14, student.getFatherPh());
+            ps.setString(15, student.getMotherName());
+            ps.setString(16, student.getMotherCNIC());
             ps.executeUpdate();
             System.out.println("Student added succesfully...");
         } catch (SQLException ex) {
@@ -136,18 +161,47 @@ public class studentDAO {
         Database_Connection database_Connection = new Database_Connection(url);
         Connection con = database_Connection.db_connction();
         try {
-            PreparedStatement ps=con.prepareStatement("update students set name=?, className=?, CNIC=?, address=?, admissionDate=?, image=? where id=? and deleted=false");
+            PreparedStatement ps=con.prepareStatement("update students set name=?, className=?, CNIC=?, address=?, admissionDate=?, image=?, rollNo=?, cast=?, religion=?, fatherName=?, fatherCNIC=?, fatherPh=?, motherName=?, motherCNIC=? where id=? and deleted=false");
             ps.setString(1, student.getName());
             ps.setString(2, student.getClassName());
             ps.setString(3, student.getCNIC());
             ps.setString(4, student.getAddress());
             ps.setDate(5, Date.valueOf(sdf.format(student.getAdmissionDate())));
             ps.setBytes(6, student.getImage());
-            ps.setInt(7, student.getId());
+            ps.setString(7, student.getRollNo());
+            ps.setString(8, student.getCast());
+            ps.setString(9, student.getReligion());
+            ps.setString(10, student.getFatherName());
+            ps.setString(11, student.getFatherCNIC());
+            ps.setString(12, student.getFatherPh());
+            ps.setString(13, student.getMotherName());
+            ps.setString(14, student.getMotherCNIC());
+            ps.setInt(15, student.getId());
             ps.executeUpdate();
             System.out.println("Student updated successfully ...");
         } catch (SQLException ex) {
             Logger.getLogger(studentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public int getMaxId(){
+        Database_Connection database_Connection = new Database_Connection(url);
+        Connection con = database_Connection.db_connction();
+        try {
+            PreparedStatement ps=con.prepareStatement("Select max(id)+1 as id from students");
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(studentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(studentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return 1;
     }
 }
