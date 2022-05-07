@@ -16,10 +16,11 @@ public class teacher {
     private String name;
     private String CNIC;
     private String ph;
-    private Date date;
+    private Date created;
     private String address;
     private byte[] image;
     private String education;
+    private boolean deleted;
 
     public int getId() {
         return id;
@@ -53,12 +54,12 @@ public class teacher {
         this.ph = ph;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreated(Date date) {
+        this.created = date;
     }
 
     public String getAddress() {
@@ -85,8 +86,18 @@ public class teacher {
         this.education = education;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
-        return "teacher{" + "id=" + id + ", name=" + name + ", CNIC=" + CNIC + ", ph=" + ph + ", date=" + date + ", address=" + address + ", image=" + image + ", education=" + education + '}';
+        return "teacher{" + "id=" + id + ", name=" + name + ", CNIC=" + CNIC + ", ph=" + ph + ", date=" + created + ", address=" + address + ", image=" + image + ", education=" + education + ", deleted=" + deleted + '}';
     }
+
+    
 }

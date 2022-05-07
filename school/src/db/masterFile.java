@@ -14,7 +14,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,12 +71,21 @@ public class masterFile {
                     br.close();
                     String migration = sb.toString();
                     System.out.println("Running "+migrationFile+".sql : BD Query : "+migration);
-//                    PreparedStatement ps=con.prepareStatement(migration);
-//                    ps.executeUpdate();
+                    PreparedStatement ps=con.prepareStatement(migration);
+                    ps.executeUpdate();
+                    ps.close();
+                    System.out.println(migrationFile+".sql executed.");
+                    ps = con.prepareStatement("insert into changeLogs (discription, created) values (? ,?) ");
+                    ps.setString(1, migrationFile);
+                    ps.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+                    ps.executeUpdate();
+                    
                     
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(masterFile.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
+                    Logger.getLogger(masterFile.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
                     Logger.getLogger(masterFile.class.getName()).log(Level.SEVERE, null, ex);
                 }finally{
                     try {

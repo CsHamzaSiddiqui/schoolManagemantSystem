@@ -19,6 +19,7 @@ public class student {
     private String address;
     private Date admissionDate;
     private byte[] image;
+    private boolean deleted;
 
     public int getId() {
         return id;
@@ -76,10 +77,16 @@ public class student {
         this.image = image;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
-        return "student{" + "id=" + id + ", name=" + name + ", className=" + className + ", CNIC=" + CNIC + ", address=" + address + ", admissionDate=" + admissionDate + ", image=" + image + '}';
+        return "student{" + "id=" + id + ", name=" + name + ", className=" + className + ", CNIC=" + CNIC + ", address=" + address + ", admissionDate=" + admissionDate + ", image=" + image + ", deleted=" + deleted + '}';
     }
-    
-    
 }
