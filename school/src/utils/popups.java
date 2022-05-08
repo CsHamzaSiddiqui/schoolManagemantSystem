@@ -44,4 +44,27 @@ public class popups {
         }
     }
     
+    public void setCustomPopup(String input, JList jList1, JPanel panel, String table, String field)
+    {
+        if(input.isEmpty()){
+            panel.setVisible(false);
+        }else{
+            searchFilter filter=new searchFilter();
+            filter.setFieldName(field);
+            filter.setFieldValue(input);
+            List<searchFilter> filters = new ArrayList<>();
+            filters.add(filter);
+            List<String> students=customDao.getNameByFilters(table, filters, field);
+            if(!students.isEmpty()){
+                panel.setVisible(true);
+            }
+            jList1.removeAll();
+            DefaultListModel dlm=new DefaultListModel();
+            for(String std:students){
+                dlm.addElement(std);
+            }
+            jList1.setModel(dlm);
+        }
+    }
+    
 }

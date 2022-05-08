@@ -44,6 +44,9 @@
           </Constraints>
         </Component>
         <Container class="javax.swing.JPanel" name="namePopup">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="namePopupFocusLost"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="namePopup.setVisible(false);"/>
           </AuxValues>

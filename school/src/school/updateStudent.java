@@ -139,6 +139,12 @@ public class updateStudent extends javax.swing.JPanel {
         addstd.add(bform);
         bform.setBounds(270, 200, 270, 34);
 
+        namePopup.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                namePopupFocusLost(evt);
+            }
+        });
+
         names.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 namesMouseClicked(evt);
@@ -487,6 +493,11 @@ public class updateStudent extends javax.swing.JPanel {
         pop.setStudentNamePopup(name.getText(), names, namePopup);
         // TODO add your handling code here:
     }//GEN-LAST:event_nameKeyReleased
+
+    private void namePopupFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namePopupFocusLost
+        namePopup.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_namePopupFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

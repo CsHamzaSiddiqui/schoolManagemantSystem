@@ -88,6 +88,12 @@ public class viewStudent extends javax.swing.JPanel {
         add(name);
         name.setBounds(170, 20, 220, 30);
 
+        namePopup.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                namePopupFocusLost(evt);
+            }
+        });
+
         nameList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 nameListMouseClicked(evt);
@@ -154,6 +160,11 @@ public class viewStudent extends javax.swing.JPanel {
         setTable(jTable1, stList);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void namePopupFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namePopupFocusLost
+        namePopup.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_namePopupFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

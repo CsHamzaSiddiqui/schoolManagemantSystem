@@ -21,6 +21,9 @@ public class Home extends javax.swing.JFrame {
      studentDAO dao=new studentDAO();
      viewStudent viewStd=new viewStudent();
      updateStudent updateStd = new updateStudent();
+     addTeacher addTeach = new addTeacher();
+     viewTeacher viewTeach = new viewTeacher();
+     updateTeacher updateTeach = new updateTeacher();
     /**
      * Creates new form Home
      */
@@ -36,6 +39,17 @@ public class Home extends javax.swing.JFrame {
         updateStd.setBounds(0, 0, 1280, 530);
         updateStd.setVisible(false);
         
+        jPanel4.add(addTeach);
+        addTeach.setBounds(0, 0, 1280, 530);
+        addTeach.setVisible(false);
+        
+        jPanel4.add(viewTeach);
+        viewTeach.setBounds(0, 0, 1280, 530);
+        viewTeach.setVisible(false);
+        
+        jPanel4.add(updateTeach);
+        updateTeach.setBounds(0, 0, 1280, 530);
+        updateTeach.setVisible(false);
     }
 
     public void resetValues(){
@@ -52,6 +66,18 @@ public class Home extends javax.swing.JFrame {
         religion.setText("");
         motherName.setText("");
         motherCNIC.setText("");
+    }
+    
+    public void disapearStudent(){
+        addstd.setVisible(false);
+        viewStd.setVisible(false);
+        updateStd.setVisible(false);
+    }
+    
+    public void disapearTeacher(){
+        addTeach.setVisible(false);
+        viewTeach.setVisible(false);
+        updateTeach.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,7 +154,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        TeacherBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teacher Details", "View Teachers", "Add  Teacher", "Update Teacher", "Delete Teacher" }));
+        TeacherBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Staff Details", "View Teachers", "Add  Teacher", "Update Teacher", "Delete Teacher" }));
         TeacherBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 TeacherBoxItemStateChanged(evt);
@@ -369,6 +395,7 @@ public class Home extends javax.swing.JFrame {
 
     private void StudentBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_StudentBoxItemStateChanged
         TeacherBox.setSelectedIndex(0);
+        disapearTeacher();
         if(StudentBox.getSelectedIndex()>0){
             jPanel4.setVisible(true);
             title.setText((String) StudentBox.getSelectedItem());
@@ -397,17 +424,43 @@ public class Home extends javax.swing.JFrame {
             }
         }else{
             jPanel4.setVisible(false);
-            title.setText("HOME");
+            title.setText("Home");
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_StudentBoxItemStateChanged
 
     private void TeacherBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TeacherBoxItemStateChanged
         StudentBox.setSelectedIndex(0);
+        disapearStudent();
         if(TeacherBox.getSelectedIndex()>0){
+            jPanel4.setVisible(true);
             title.setText((String) TeacherBox.getSelectedItem());
+            switch (TeacherBox.getSelectedIndex()) {
+                case 1:
+                    updateTeach.setVisible(false);
+                    viewTeach.setVisible(true);
+                    viewTeach.setValues();
+                    addTeach.setVisible(false);
+                    break;
+                case 2:
+                    updateTeach.setVisible(false);
+                    viewTeach.setVisible(false);
+                    addTeach.setVisible(true);
+                    addTeach.resetValues();
+                    break;
+                case 3:
+                case 4:
+                    addTeach.setVisible(false);
+                    updateTeach.setVisible(true);
+                    viewTeach.setVisible(false);
+                    updateTeach.resetValues((String) TeacherBox.getSelectedItem());
+                    break;
+                default:
+                    break;
+            }
         }else{
-            title.setText("HOME");
+            jPanel4.setVisible(false);
+            title.setText("Home");
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_TeacherBoxItemStateChanged
