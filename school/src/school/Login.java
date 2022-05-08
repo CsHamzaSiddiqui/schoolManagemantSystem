@@ -23,7 +23,7 @@ import utils.getBasicPath;
 public class Login extends javax.swing.JFrame {
     static String userName;
     static String password;
-    static String credURL = System.getProperty("user.dir")+"\\creds.txt";
+    public static String credURL = System.getProperty("user.dir")+"\\creds.txt";
     public static String url=null;
     /**
      * Creates new form Login
