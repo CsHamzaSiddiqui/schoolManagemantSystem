@@ -6,6 +6,7 @@
 package school;
 
 import DAOs.studentDAO;
+import db.masterFile;
 import entities.student;
 import java.sql.Date;
 import utils.browseImage;
@@ -29,6 +30,8 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        masterFile master=new masterFile();
+        master.runMigrations();
         addstd.setVisible(false);
         
         jPanel4.add(viewStd);
@@ -91,6 +94,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         StudentBox = new javax.swing.JComboBox<>();
         TeacherBox = new javax.swing.JComboBox<>();
@@ -143,6 +147,17 @@ public class Home extends javax.swing.JFrame {
         title.setText("Home");
         jPanel2.add(title);
         title.setBounds(250, 10, 820, 60);
+
+        jButton3.setBackground(new java.awt.Color(255, 51, 51));
+        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jButton3.setText("LogOut");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3);
+        jButton3.setBounds(1210, 20, 110, 30);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 20, 1360, 80);
@@ -540,6 +555,12 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_motherCNICKeyPressed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.setVisible(false);
+        new Login().setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -591,6 +612,7 @@ public class Home extends javax.swing.JFrame {
     public javax.swing.JLabel image;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

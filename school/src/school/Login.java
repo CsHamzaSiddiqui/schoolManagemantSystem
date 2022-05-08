@@ -5,19 +5,68 @@
  */
 package school;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import utils.browseImage;
+import utils.getBasicPath;
+
 /**
  *
  * @author Laptop Point
  */
 public class Login extends javax.swing.JFrame {
-
+    static String userName;
+    static String password;
+    static String credURL = System.getProperty("user.dir")+"\\creds.txt";
+    public static String url=null;
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        if(url==null || url.isEmpty()){
+            getCreds();
+        }
     }
 
+    public void getCreds(){
+        try {
+           FileReader fr = new FileReader(new File(credURL));
+            // be sure to not have line starting with “–” or “/*” or any other non aplhabetical character
+            BufferedReader br = new BufferedReader(fr);
+            String s;
+            while((s = br.readLine()) != null)
+            {
+                System.out.println(s);
+                if(s.contains("Username")){
+                    userName = s.split("@%&%&@:")[1];
+                    System.out.println("User Name: "+userName);
+                }else if(s.contains("Password")){
+                    password = s.split("@%&%&@:")[1];
+                    System.out.println("Password : "+password);
+                }else if(s.contains("DataBaseFile")){
+                    url = s.split("@%&%&@:")[1];
+                    File file=new File(url);
+                    if(!file.exists() || url.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "System not able to found record...\nPlease select a file for current use.");
+                        url=browseImage.browseFile();
+                    }
+                    System.out.println("Databse : "+url);
+                }
+            }
+            br.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,6 +144,11 @@ public class Login extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Log In");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3);
         jButton3.setBounds(510, 530, 160, 50);
 
@@ -111,6 +165,7 @@ public class Login extends javax.swing.JFrame {
         jButton1.setOpaque(false);
         jPanel1.add(jButton1);
         jButton1.setBounds(510, 480, 150, 25);
+        jButton1.setVisible(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/school/pages1.jpg"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -141,6 +196,16 @@ public class Login extends javax.swing.JFrame {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(userName.equals(usrname.getText()) && password.equals(jPasswordField1.getText())){
+            this.setVisible(false);
+            new Home().setVisible(true);
+        }else{
+            JOptionPane.showConfirmDialog(null, "Authentication Erorr", "Invalid username or Password", JOptionPane.ERROR_MESSAGE);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

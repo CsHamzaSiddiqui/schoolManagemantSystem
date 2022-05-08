@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static school.School.url;
+import static school.Login.url;
 import entities.teacher;
 import java.sql.Date;
 import java.text.SimpleDateFormat;

@@ -11,7 +11,7 @@ import utils.getBasicPath;
  * @author Laptop Point
  */
 public class School {
-    public static String url=getBasicPath.currentPath()+"/dataBases/schoolDB.db";
+//    public static String url=getBasicPath.currentPath()+"/dataBases/schoolDB.db";
     /**
      * @param args the command line arguments
      */

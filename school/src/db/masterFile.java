@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static school.School.url;
+import static school.Login.url;
 import utils.getBasicPath;
 
 
