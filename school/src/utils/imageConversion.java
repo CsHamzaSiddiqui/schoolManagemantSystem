@@ -5,10 +5,13 @@
  */
 package utils;
 
+import java.awt.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,5 +39,13 @@ public class imageConversion {
             JOptionPane.showMessageDialog(null, ex);
         }
         return imagebyte;
+    }
+    
+    public void byteToImage(byte[] bytes, JLabel image){
+        ImageIcon imgi=new ImageIcon(bytes);
+        Image imag=imgi.getImage();
+        imag=imag.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon icon=new ImageIcon(imag);
+        image.setIcon(icon);
     }
 }

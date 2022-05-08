@@ -20,6 +20,10 @@ import utils.imageConversion;
 public class Home extends javax.swing.JFrame {
      studentDAO dao=new studentDAO();
      viewStudent viewStd=new viewStudent();
+     updateStudent updateStd = new updateStudent();
+     addTeacher addTeach = new addTeacher();
+     viewTeacher viewTeach = new viewTeacher();
+     updateTeacher updateTeach = new updateTeacher();
     /**
      * Creates new form Home
      */
@@ -31,9 +35,50 @@ public class Home extends javax.swing.JFrame {
         viewStd.setBounds(0, 0, 1280, 530);
         viewStd.setVisible(false);
         
-        id.setText(String.valueOf(dao.getMaxId()));
+        jPanel4.add(updateStd);
+        updateStd.setBounds(0, 0, 1280, 530);
+        updateStd.setVisible(false);
+        
+        jPanel4.add(addTeach);
+        addTeach.setBounds(0, 0, 1280, 530);
+        addTeach.setVisible(false);
+        
+        jPanel4.add(viewTeach);
+        viewTeach.setBounds(0, 0, 1280, 530);
+        viewTeach.setVisible(false);
+        
+        jPanel4.add(updateTeach);
+        updateTeach.setBounds(0, 0, 1280, 530);
+        updateTeach.setVisible(false);
     }
 
+    public void resetValues(){
+        id.setText(String.valueOf(dao.getMaxId()));
+        name.setText("");
+        className.setText("");
+        bform.setText("");
+        address.setText("");
+        roll.setText("");
+        cast.setText("");
+        fatherCNIC.setText("");
+        fatherName.setText("");
+        fatherPh.setText("");
+        religion.setText("");
+        motherName.setText("");
+        motherCNIC.setText("");
+    }
+    
+    public void disapearStudent(){
+        addstd.setVisible(false);
+        viewStd.setVisible(false);
+        updateStd.setVisible(false);
+    }
+    
+    public void disapearTeacher(){
+        addTeach.setVisible(false);
+        viewTeach.setVisible(false);
+        updateTeach.setVisible(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,7 +154,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        TeacherBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teacher Details", "View Teachers", "Add  Teacher", "Update Teacher", "Delete Teacher" }));
+        TeacherBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Staff Details", "View Teachers", "Add  Teacher", "Update Teacher", "Delete Teacher" }));
         TeacherBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 TeacherBoxItemStateChanged(evt);
@@ -141,6 +186,11 @@ public class Home extends javax.swing.JFrame {
         addstd.setLayout(null);
 
         bform.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        bform.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                bformKeyPressed(evt);
+            }
+        });
         addstd.add(bform);
         bform.setBounds(270, 200, 270, 34);
 
@@ -255,6 +305,11 @@ public class Home extends javax.swing.JFrame {
         jLabel12.setBounds(160, 250, 120, 30);
 
         fatherCNIC.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fatherCNIC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fatherCNICKeyPressed(evt);
+            }
+        });
         addstd.add(fatherCNIC);
         fatherCNIC.setBounds(270, 250, 270, 34);
 
@@ -273,6 +328,11 @@ public class Home extends javax.swing.JFrame {
         jLabel14.setBounds(590, 300, 120, 30);
 
         motherCNIC.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        motherCNIC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                motherCNICKeyPressed(evt);
+            }
+        });
         addstd.add(motherCNIC);
         motherCNIC.setBounds(700, 300, 250, 34);
 
@@ -300,6 +360,11 @@ public class Home extends javax.swing.JFrame {
         jLabel17.setBounds(590, 250, 120, 30);
 
         fatherPh.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fatherPh.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fatherPhKeyPressed(evt);
+            }
+        });
         addstd.add(fatherPh);
         fatherPh.setBounds(700, 250, 250, 34);
 
@@ -330,30 +395,72 @@ public class Home extends javax.swing.JFrame {
 
     private void StudentBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_StudentBoxItemStateChanged
         TeacherBox.setSelectedIndex(0);
+        disapearTeacher();
         if(StudentBox.getSelectedIndex()>0){
             jPanel4.setVisible(true);
             title.setText((String) StudentBox.getSelectedItem());
-            if(StudentBox.getSelectedIndex()==1){
-                addstd.setVisible(false);
-                viewStd.setVisible(true);
-                viewStd.setValues();
-            }else if(StudentBox.getSelectedIndex()==2){
-                addstd.setVisible(true);
-                viewStd.setVisible(false);
+            switch (StudentBox.getSelectedIndex()) {
+                case 1:
+                    addstd.setVisible(false);
+                    updateStd.setVisible(false);
+                    viewStd.setVisible(true);
+                    viewStd.setValues();
+                    break;
+                case 2:
+                    addstd.setVisible(true);
+                    viewStd.setVisible(false);
+                    updateStd.setVisible(false);
+                    resetValues();
+                    break;
+                case 3:
+                case 4:
+                    addstd.setVisible(false);
+                    updateStd.setVisible(true);
+                    viewStd.setVisible(false);
+                    updateStd.resetValues((String) StudentBox.getSelectedItem());
+                    break;
+                default:
+                    break;
             }
         }else{
             jPanel4.setVisible(false);
-            title.setText("HOME");
+            title.setText("Home");
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_StudentBoxItemStateChanged
 
     private void TeacherBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TeacherBoxItemStateChanged
         StudentBox.setSelectedIndex(0);
+        disapearStudent();
         if(TeacherBox.getSelectedIndex()>0){
+            jPanel4.setVisible(true);
             title.setText((String) TeacherBox.getSelectedItem());
+            switch (TeacherBox.getSelectedIndex()) {
+                case 1:
+                    updateTeach.setVisible(false);
+                    viewTeach.setVisible(true);
+                    viewTeach.setValues();
+                    addTeach.setVisible(false);
+                    break;
+                case 2:
+                    updateTeach.setVisible(false);
+                    viewTeach.setVisible(false);
+                    addTeach.setVisible(true);
+                    addTeach.resetValues();
+                    break;
+                case 3:
+                case 4:
+                    addTeach.setVisible(false);
+                    updateTeach.setVisible(true);
+                    viewTeach.setVisible(false);
+                    updateTeach.resetValues((String) TeacherBox.getSelectedItem());
+                    break;
+                default:
+                    break;
+            }
         }else{
-            title.setText("HOME");
+            jPanel4.setVisible(false);
+            title.setText("Home");
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_TeacherBoxItemStateChanged
@@ -392,6 +499,46 @@ public class Home extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Student Saved Successfully...");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void bformKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bformKeyPressed
+        char c = evt.getKeyChar();
+        if(Character.isDigit(c) || Character.isISOControl(c)){
+            bform.setEditable(true);
+        }else{
+            bform.setEditable(false);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bformKeyPressed
+
+    private void fatherCNICKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fatherCNICKeyPressed
+        char c = evt.getKeyChar();
+        if(Character.isDigit(c) || Character.isISOControl(c)){
+            fatherCNIC.setEditable(true);
+        }else{
+            fatherCNIC.setEditable(false);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fatherCNICKeyPressed
+
+    private void fatherPhKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fatherPhKeyPressed
+        char c = evt.getKeyChar();
+        if(Character.isDigit(c) || Character.isISOControl(c)){
+            fatherPh.setEditable(true);
+        }else{
+            fatherPh.setEditable(false);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fatherPhKeyPressed
+
+    private void motherCNICKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_motherCNICKeyPressed
+        char c = evt.getKeyChar();
+        if(Character.isDigit(c) || Character.isISOControl(c)){
+            motherCNIC.setEditable(true);
+        }else{
+            motherCNIC.setEditable(false);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_motherCNICKeyPressed
 
     /**
      * @param args the command line arguments

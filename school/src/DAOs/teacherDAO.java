@@ -31,7 +31,7 @@ public class teacherDAO {
         Connection con = database_Connection.db_connction();
         List<teacher> teachers=new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("select * from teacher where name like '"+alpha+"%' and deleted=false");
+            PreparedStatement ps = con.prepareStatement("select * from teacher where name like '"+alpha+"%' and deleted=0");
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 teacher teach=new teacher();
@@ -49,7 +49,7 @@ public class teacherDAO {
                 teach.setOrderNo(rs.getInt("orderNo"));
                 teach.setPersonalNo(rs.getInt("personalNo"));
                 teach.setSpouceName(rs.getString("SpouseName"));
-                teach.setSpouceCNIC(rs.getString("SpouceCNIC"));
+                teach.setSpouceCNIC(rs.getString("SpouseCNIC"));
                 teach.setBPS(rs.getString("BPS"));
                 teach.setDOB(rs.getDate("DOB"));
                 teach.setDOJ(rs.getDate("DOJ"));
@@ -69,12 +69,53 @@ public class teacherDAO {
         return teachers;
     }
     
+    public teacher getTeacherByName(String alpha){
+        Database_Connection database_Connection = new Database_Connection(url);
+        Connection con = database_Connection.db_connction();
+        teacher teach=new teacher();
+        try {
+            PreparedStatement ps = con.prepareStatement("select * from teacher where name='"+alpha+"' and deleted=0");
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                teach.setId(rs.getInt("id"));
+                teach.setName(rs.getString("name"));
+                teach.setPh(rs.getString("ph"));
+                teach.setCNIC(rs.getString("CNIC"));
+                teach.setAddress(rs.getString("Address"));
+                teach.setEducation(rs.getString("Education"));
+                teach.setCreated(rs.getDate("created"));
+                teach.setImage(rs.getBytes("image"));
+                teach.setDeleted(rs.getBoolean("deleted"));
+                teach.setCast(rs.getString("cast"));
+                teach.setReligion(rs.getString("religion"));
+                teach.setOrderNo(rs.getInt("orderNo"));
+                teach.setPersonalNo(rs.getInt("personalNo"));
+                teach.setSpouceName(rs.getString("SpouseName"));
+                teach.setSpouceCNIC(rs.getString("SpouseCNIC"));
+                teach.setBPS(rs.getString("BPS"));
+                teach.setDOB(rs.getDate("DOB"));
+                teach.setDOJ(rs.getDate("DOJ"));
+                teach.setDOR(rs.getDate("DOR"));
+                teach.setEmailAddress(rs.getString("emailAddress"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(teacherDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(teacherDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return teach;
+    }
+    
     public List<teacher> findAll(){
         Database_Connection database_Connection = new Database_Connection(url);
         Connection con = database_Connection.db_connction();
         List<teacher> teachers=new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("select * from teacher where deleted=false");
+            PreparedStatement ps = con.prepareStatement("select * from teacher where deleted=0");
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 teacher teach=new teacher();
@@ -92,7 +133,7 @@ public class teacherDAO {
                 teach.setOrderNo(rs.getInt("orderNo"));
                 teach.setPersonalNo(rs.getInt("personalNo"));
                 teach.setSpouceName(rs.getString("SpouseName"));
-                teach.setSpouceCNIC(rs.getString("SpouceCNIC"));
+                teach.setSpouceCNIC(rs.getString("SpouseCNIC"));
                 teach.setBPS(rs.getString("BPS"));
                 teach.setDOB(rs.getDate("DOB"));
                 teach.setDOJ(rs.getDate("DOJ"));
@@ -154,7 +195,7 @@ public class teacherDAO {
         Database_Connection database_Connection = new Database_Connection(url);
         Connection con = database_Connection.db_connction();
         try {
-            PreparedStatement ps=con.prepareStatement("update teacher set deleted=true where id = ?");
+            PreparedStatement ps=con.prepareStatement("update teacher set deleted=1 where id = ?");
             ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("Teacher deleted succesfully...");
@@ -173,7 +214,7 @@ public class teacherDAO {
         Database_Connection database_Connection = new Database_Connection(url);
         Connection con = database_Connection.db_connction();
         try {
-            PreparedStatement ps=con.prepareStatement("update teacher set name=?, ph=?, CNIC=?, address=?, education=?, created=?, image=?, cast=?, religion=?, spouseName=?, spouseCNIC=?, DOB=?, DOJ=?, DOR=?, emailAddress=?, personalNo=?, orderNo=?, BPS=? where id=? and deleted=false");
+            PreparedStatement ps=con.prepareStatement("update teacher set name=?, ph=?, CNIC=?, address=?, education=?, created=?, image=?, cast=?, religion=?, spouseName=?, spouseCNIC=?, DOB=?, DOJ=?, DOR=?, emailAddress=?, personalNo=?, orderNo=?, BPS=? where id=? and deleted=0");
             ps.setString(1, teacher.getName());
             ps.setString(2, teacher.getPh());
             ps.setString(3, teacher.getCNIC());
