@@ -25,6 +25,7 @@ public class Home extends javax.swing.JFrame {
      addTeacher addTeach = new addTeacher();
      viewTeacher viewTeach = new viewTeacher();
      updateTeacher updateTeach = new updateTeacher();
+     settings set=new settings();
     /**
      * Creates new form Home
      */
@@ -53,6 +54,10 @@ public class Home extends javax.swing.JFrame {
         jPanel4.add(updateTeach);
         updateTeach.setBounds(0, 0, 1280, 530);
         updateTeach.setVisible(false);
+        
+        jPanel4.add(set);
+        set.setBounds(0, 0, 1280, 530);
+        set.setVisible(false);
     }
 
     public void resetValues(){
@@ -98,6 +103,7 @@ public class Home extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         StudentBox = new javax.swing.JComboBox<>();
         TeacherBox = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         addstd = new javax.swing.JPanel();
         bform = new javax.swing.JTextField();
@@ -176,6 +182,13 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Settings");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -184,12 +197,15 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(StudentBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TeacherBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1064, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 944, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(StudentBox, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
             .addComponent(TeacherBox)
+            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel3);
@@ -411,6 +427,7 @@ public class Home extends javax.swing.JFrame {
     private void StudentBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_StudentBoxItemStateChanged
         TeacherBox.setSelectedIndex(0);
         disapearTeacher();
+        set.setVisible(false);
         if(StudentBox.getSelectedIndex()>0){
             jPanel4.setVisible(true);
             title.setText((String) StudentBox.getSelectedItem());
@@ -447,6 +464,7 @@ public class Home extends javax.swing.JFrame {
     private void TeacherBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TeacherBoxItemStateChanged
         StudentBox.setSelectedIndex(0);
         disapearStudent();
+        set.setVisible(false);
         if(TeacherBox.getSelectedIndex()>0){
             jPanel4.setVisible(true);
             title.setText((String) TeacherBox.getSelectedItem());
@@ -561,6 +579,15 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        disapearStudent();
+        disapearTeacher();
+        jPanel4.setVisible(true);
+        set.setVisible(true);
+        set.setValues();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -613,6 +640,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
