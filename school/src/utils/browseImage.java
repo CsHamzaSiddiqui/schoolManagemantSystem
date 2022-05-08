@@ -28,4 +28,13 @@ public class browseImage {
         img.setIcon(icon);
         path.setText(filename);
     }
+    
+    public static String browseFile()
+    {
+        JFileChooser chooser=new JFileChooser();
+        chooser.showOpenDialog(null);
+        File file=chooser.getSelectedFile();
+        String filename=file.getAbsolutePath();
+        return filename;
+    }
 }
