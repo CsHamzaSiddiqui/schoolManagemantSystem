@@ -10,6 +10,7 @@ import entities.fileUpdater;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import utils.browseImage;
 import utils.fileOperations;
 
 /**
@@ -233,6 +234,7 @@ public class settings extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        dbFile.setText(browseImage.browseFile());
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
