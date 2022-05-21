@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  *
  * @author hp
  */
-public class browseImage {
+public class BrowsingUtil {
     public void brows(JLabel img, JTextField path)
     {
         String filename="";
@@ -32,6 +32,16 @@ public class browseImage {
     public static String browseFile()
     {
         JFileChooser chooser=new JFileChooser();
+        chooser.showOpenDialog(null);
+        File file=chooser.getSelectedFile();
+        String filename=file.getAbsolutePath();
+        return filename;
+    }
+    
+    public static String browseFolder()
+    {
+        JFileChooser chooser=new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooser.showOpenDialog(null);
         File file=chooser.getSelectedFile();
         String filename=file.getAbsolutePath();
