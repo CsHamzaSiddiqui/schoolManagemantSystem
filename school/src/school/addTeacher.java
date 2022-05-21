@@ -10,7 +10,7 @@ import entities.teacher;
 import java.sql.Date;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
-import utils.browseImage;
+import utils.BrowsingUtil;
 import utils.imageConversion;
 
 /**
@@ -377,7 +377,7 @@ public class addTeacher extends javax.swing.JPanel {
     }//GEN-LAST:event_spouceCNICKeyPressed
 
     private void browsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsActionPerformed
-        browseImage browse = new browseImage();
+        BrowsingUtil browse = new BrowsingUtil();
         browse.brows(image, path);
         // TODO add your handling code here:
     }//GEN-LAST:event_browsActionPerformed

@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import utils.browseImage;
+import utils.BrowsingUtil;
 import utils.getBasicPath;
 
 /**
@@ -55,7 +55,7 @@ public class Login extends javax.swing.JFrame {
                     File file=new File(url);
                     if(!file.exists() || url.isEmpty()){
                         JOptionPane.showMessageDialog(null, "System not able to found record...\nPlease select a file for current use.");
-                        url=browseImage.browseFile();
+                        url=BrowsingUtil.browseFile();
                     }
                     System.out.println("Databse : "+url);
                 }

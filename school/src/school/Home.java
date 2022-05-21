@@ -9,7 +9,7 @@ import DAOs.studentDAO;
 import db.masterFile;
 import entities.student;
 import java.sql.Date;
-import utils.browseImage;
+import utils.BrowsingUtil;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import utils.imageConversion;
@@ -503,7 +503,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_addressActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        browseImage browse = new browseImage();
+        BrowsingUtil browse = new BrowsingUtil();
         browse.brows(image, path);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
